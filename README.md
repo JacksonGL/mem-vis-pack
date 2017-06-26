@@ -2,7 +2,7 @@
 
 This repo contains a prototype that takes a memory snapshot from node-chakra and visualizes the memory data.
 
-**Requirement**: the binaries in this repo assumes a **x64 Windows 10**.
+**Requirement**: the binaries in this repo assume a **x64 Windows 10**.
 
 # Install
 

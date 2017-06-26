@@ -1,5 +1,4 @@
-ttdLogURI =
-    __dirname + '\\..\\snapshot';
+
 
 setTimeout(() => {}, 0);
 setTimeout(function() {
@@ -2086,7 +2085,13 @@ setTimeout(function() {
 
     setTimeout(function() {
         console.log(decrypt);
-        emitTTDLog(ttdLogURI);
+        
+        if (global.emitTTDLog) {
+            // please make sure <MEM-VIS-DIR> points to the root dir of this repo
+            let snapshotDir = __dirname + '/../snapshot';
+            console.log('Dumping snapshot to -- ' + snapshotDir);
+            global.emitTTDLog(snapshotDir);
+        }
     }, 500);
 }, 100);
 
