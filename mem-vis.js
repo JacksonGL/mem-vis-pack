@@ -13,7 +13,11 @@
     let dataDir = path.resolve(memVisDir, 'data');
     let recordArgs = `--record ${argv.join(' ')}`;
     let replayArgs = `--replay=${replayDir} --alloc-trace ${argv.join(' ')}`;
-    let handler = () => {};
+    let handler = (err) => {
+        if (!err) return;
+        console.log('[!]: something wrong. Let me know (gongliang13@berkeley.edu). Thanks :-)');
+        console.log(err);
+    };
     let _consoleLog = console.log;
     let _console = console;
     let _slice = Array.prototype.slice;
@@ -38,6 +42,7 @@
     }
 
     function copySnapshots(sourceDir, destDir) {
+        console.log('[i]: getting snapshot...');
         var sourceFile, destFile, completeCnt = 0, resolver;
         var files = ['snap_1.json', 'prop.json', 'allocTracing_0.json'];
         let promise = new Promise((resolve, reject) => {
@@ -85,7 +90,7 @@
      * @param {*} msg 
      */
     function executeAndPromisify(cmd, args, msg) {
-        log(msg);
+        console.log(msg);
         let child = spawn(cmd, args);
         log(cmd + ' ' + args.join(' '));
         child.stdout.on('data', function (data) {

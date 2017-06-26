@@ -2,7 +2,7 @@
 
 This repo contains a prototype that takes a memory snapshot from node-chakra and visualizes the memory data.
 
-**Notice**: generator is not handled by TTD yet.
+**Requirement**: the binaries in this repo assumes a **x64 Windows 10**.
 
 # Install
 
@@ -47,3 +47,5 @@ node .\mem-vis.js .\tests\crypto.js
 # Development
 
 To set up the development environment of this tool, see [here](https://github.com/JacksonGL/memo-vis).
+
+**Notice**: generator is not handled by the Time Travel Debugging yet.
