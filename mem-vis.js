@@ -93,7 +93,7 @@
     function executeAndPromisify(cmd, args, msg) {
         console.log(msg);
         let child = spawn(cmd, args);
-        log(cmd + ' ' + args.join(' '));
+        log('     ' + cmd + ' ' + args.join(' '));
         child.stdout.on('data', function (data) {
             log(data.toString());
         });
