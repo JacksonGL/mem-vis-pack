@@ -1,0 +1,15 @@
+{
+  "name": "mem-vis-pack",
+  "version": "1.0.0",
+  "description": "binary version of the mem-vis tool",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Liang Gong",
+  "license": "ISC",
+  "dependencies": {
+    "bluebird": "^3.5.0",
+    "serve": "^6.0.0"
+  }
+}
