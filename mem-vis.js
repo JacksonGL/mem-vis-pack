@@ -68,7 +68,7 @@
             process.nextTick(resolve);
         });
         fs.readdir(dir, (err, files) => {
-            if (err) throw error;
+            if (err) throw err;
 
             for (const file of files) {
                 fs.unlinkSync(path.join(dir, file));
