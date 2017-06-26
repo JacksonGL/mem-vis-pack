@@ -1,5 +1,5 @@
 (function () {
-    let verbose = false;
+    let verbose = true;
 
     let fs = require('fs');
     let path = require('path');
@@ -10,6 +10,7 @@
     let argv = process.argv.slice(2);
     let replayDir = path.resolve(__dirname, 'snapshot');
     let memVisDir = path.resolve(__dirname, 'mem-vis');
+    let binPath = path.resolve(__dirname, 'bin', 'node');
     let dataDir = path.resolve(memVisDir, 'data');
     let recordArgs = `--record ${argv.join(' ')}`;
     let replayArgs = `--replay=${replayDir} --alloc-trace ${argv.join(' ')}`;
@@ -29,8 +30,8 @@
     // record
     cleanDir(replayDir)
     .then(cleanDir.bind(null, dataDir), handler)
-    .then(executeAndPromisify.bind(null, '.\\bin\\node', recordArgs.split(' '), '[i]: recording...'), handler)
-    .then(executeAndPromisify.bind(null, '.\\bin\\node', replayArgs.split(' '), '[i]: replaying...'), handler)
+    .then(executeAndPromisify.bind(null, binPath, recordArgs.split(' '), '[i]: recording...'), handler)
+    .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
     .then(copySnapshots.bind(null, replayDir, dataDir), handler)
     .then(openVisualization.bind(null), handler)
     .then(handler, handler);
@@ -94,11 +95,11 @@
         let child = spawn(cmd, args);
         log(cmd + ' ' + args.join(' '));
         child.stdout.on('data', function (data) {
-            log('\t' + data.toString());
+            log(data.toString());
         });
 
         child.stderr.on('data', function (data) {
-            log('\t' + data.toString());
+            log(data.toString());
         });
         let promise = new Promise((resolve, reject) => {
             child.addListener('error', reject);
