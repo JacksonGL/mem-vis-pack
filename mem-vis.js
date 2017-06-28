@@ -26,7 +26,7 @@
         if (!verbose) return;
         _consoleLog.apply(_console, _slice.call(arguments, 0));
     };
-    
+
     // record
     cleanDir(replayDir)
     .then(cleanDir.bind(null, dataDir), handler)
