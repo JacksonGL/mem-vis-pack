@@ -12,7 +12,7 @@
     let memVisDir = path.resolve(__dirname, 'mem-vis');
     let binPath = path.resolve(__dirname, 'bin', 'node');
     let dataDir = path.resolve(memVisDir, 'data');
-    let recordArgs = `--record ${argv.join(' ')}`;
+    let recordArgs = `--record --alloc-trace ${argv.join(' ')}`;
     let replayArgs = `--replay=${replayDir} --alloc-trace ${argv.join(' ')}`;
     let handler = (err) => {
         if (!err) return;
@@ -31,7 +31,7 @@
     cleanDir(replayDir)
     .then(cleanDir.bind(null, dataDir), handler)
     .then(executeAndPromisify.bind(null, binPath, recordArgs.split(' '), '[i]: recording...'), handler)
-    .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
+    // .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
     .then(copySnapshots.bind(null, replayDir, dataDir), handler)
     .then(openVisualization.bind(null), handler)
     .then(handler, handler);
@@ -42,10 +42,24 @@
         });
     }
 
+    let snapFileRegex = /snap_(\d+)\.json/;
+
     function copySnapshots(sourceDir, destDir) {
         console.log('[i]: getting snapshot...');
         var sourceFile, destFile, completeCnt = 0, resolver;
-        var files = ['snap_1.json', 'prop.json', 'allocTracing_0.json'];
+        // search for the snap_{id}.json with the max id
+        let files = fs.readdirSync(replayDir);
+        let snapFile = '', curId = -1;
+        for (let file of files) {
+            if (!file || !file.match) continue;
+            let res = file.match(snapFileRegex);
+            if (!res) continue;
+            let id = parseInt(res[1], 10);
+            if (id < curId) continue;
+            id = curId;
+            snapFile = file;
+        }
+        files = [snapFile, 'prop.json', 'allocTracing_0.json'];
         let promise = new Promise((resolve, reject) => {
             if (completeCnt >= files.length) {
                 process.nextTick(resolve);
@@ -54,8 +68,9 @@
             }
         });
         for (let file of files) {
+            let destFile = file.indexOf('snap_') === 0 ? 'snap_1.json' : file;
             sourceFile = path.resolve(sourceDir, file);
-            destFile = path.resolve(destDir, file);
+            destFile = path.resolve(destDir, destFile);
             log(`\tcopying ${file}...`);
             // copy files
             fs.createReadStream(sourceFile).pipe(fs.createWriteStream(destFile))
