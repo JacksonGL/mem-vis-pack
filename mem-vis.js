@@ -82,7 +82,8 @@
             destFile = path.resolve(destDir, destFile);
             log(`\tcopying ${file}...`);
             // copy files
-            fs.createReadStream(sourceFile).pipe(fs.createWriteStream(destFile))
+            fs.createReadStream(sourceFile, {encoding: 'ucs2'})
+                .pipe(fs.createWriteStream(destFile), {encoding: 'utf8'})
                 .on('finish', () => {
                     if (++completeCnt >= files.length && resolver) {
                         process.nextTick(resolver);
