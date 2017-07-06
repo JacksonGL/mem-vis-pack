@@ -14,7 +14,7 @@
         console.log(`[!]: current os type (${osType}) is not supported`);
         return ;
     }
-    let binPath = path.resolve(__dirname, 'bin', osType);
+    let binPath = path.resolve(__dirname, 'bin', osType, 'node');
 
     let argv = process.argv.slice(2);
     let replayDir = path.resolve(__dirname, 'snapshot');
@@ -132,3 +132,4 @@
         return promise;
     }
 })();
+
