@@ -1,4 +1,5 @@
 (function () {
+    'use strict';
     let verbose = true;
 
     let fs = require('fs');
@@ -7,10 +8,18 @@
     let Promise = require('bluebird');
     const serve = require('serve');
 
+    let osType = process.platform;
+    let supportOs = fs.readdirSync(path.resolve(__dirname, 'bin'));
+    if (supportOs.indexOf(osType) < 0) {
+        console.log(`[!]: current os type (${osType}) is not supported`);
+        return ;
+    }
+    let binPath = path.resolve(__dirname, 'bin', osType);
+
     let argv = process.argv.slice(2);
     let replayDir = path.resolve(__dirname, 'snapshot');
     let memVisDir = path.resolve(__dirname, 'mem-vis');
-    let binPath = path.resolve(__dirname, 'bin', 'node');
+    
     let dataDir = path.resolve(memVisDir, 'data');
     let recordArgs = `--record --alloc-trace ${argv.join(' ')}`;
     let replayArgs = `--replay=${replayDir} --alloc-trace ${argv.join(' ')}`;
