@@ -49,3 +49,12 @@ node .\mem-vis.js .\tests\crypto.js
 To set up the development environment of this tool, see [here](https://github.com/JacksonGL/memo-vis).
 
 **Notice**: generator is not handled by the Time Travel Debugging yet.
+
+
+# Install (nvs)
+
+To install the node-chakracore side-by-side with you existing node, we recommend using [nvs](https://github.com/jasongin/nvs)
+
+```
+nvs remote mem-analysis https://raw.githubusercontent.com/JacksonGL/node-chakracore/AllocTracing/releases
+```
