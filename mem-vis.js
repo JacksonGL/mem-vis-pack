@@ -1,20 +1,34 @@
 (function () {
     'use strict';
-    let verbose = true;
+    let verbose = false;
 
     let fs = require('fs');
     let path = require('path');
     let spawn = require('child_process').spawn;
     let Promise = require('bluebird');
     const serve = require('serve');
+    const cp = require('child_process');
 
-    let osType = process.platform;
-    let supportOs = fs.readdirSync(path.resolve(__dirname, 'bin'));
-    if (supportOs.indexOf(osType) < 0) {
-        console.log(`[!]: current os type (${osType}) is not supported`);
-        return ;
+    let binPath = 'node'; // assume that the node binary the default node
+    try {
+        cp.execSync('node --alloc-trace -e "var test;"',  
+            { stdio: ['ignore', 'ignore', 'pipe'] }
+        );
+    } catch (ex) {
+        let err = ex + '';
+        if (err.indexOf('bad option') >= 0) {
+            // the mem-analysis host binary is not the default node
+            // decide node binary location
+            let osType = process.platform;
+            let supportOs = fs.readdirSync(path.resolve(__dirname, 'bin'));
+            if (supportOs.indexOf(osType) < 0) {
+                console.log(`[!]: current os type (${osType}) is not supported`);
+                return ;
+            }
+            console.log('[i]: using local node binary');
+            binPath = path.resolve(__dirname, 'bin', osType, 'node');
+        }
     }
-    let binPath = path.resolve(__dirname, 'bin', osType, 'node');
 
     let argv = process.argv.slice(2);
     let replayDir = path.resolve(__dirname, 'snapshot');
