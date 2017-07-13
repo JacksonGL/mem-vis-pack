@@ -32,13 +32,13 @@ if (global.emitTTDLog) {
   **2.** record, replay, and get snapshots
 
 ```
-node .\mem-vis.js <NODE-APP> <APP-ARGS>
+node ./mem-vis.js <NODE-APP> <APP-ARGS>
 ```
 
 Example:
 
 ```
-node .\mem-vis.js .\tests\crypto.js
+node ./mem-vis.js ./tests/crypto.js
 ```
   
   **3.** open [http://localhost:5000](http://localhost:5000)
