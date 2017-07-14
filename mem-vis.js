@@ -47,7 +47,11 @@
     let _slice = Array.prototype.slice;
     let log = function () {
         if (!verbose) return;
-        _consoleLog.apply(_console, _slice.call(arguments, 0));
+        try {
+            _consoleLog.apply(_console, _slice.call(arguments, 0));
+        } catch(ex) {
+            console.log(ex);
+        }
     };
 
     // record
@@ -110,15 +114,13 @@
 
     function cleanDir(dir) {
         let promise = new Promise((resolve, reject) => {
-            process.nextTick(resolve);
-        });
-        fs.readdir(dir, (err, files) => {
-            if (err) throw err;
-
-            for (const file of files) {
-                fs.unlinkSync(path.join(dir, file));
-            }
-            
+            fs.readdir(dir, (err, files) => {
+                if (err) throw err;
+                for (const file of files) {
+                    fs.unlinkSync(path.join(dir, file));
+                }
+                process.nextTick(resolve);
+            });
         });
         return promise;
     }
@@ -134,11 +136,11 @@
         let child = spawn(cmd, args);
         log('     ' + cmd + ' ' + args.join(' '));
         child.stdout.on('data', function (data) {
-            log(data.toString());
+            console.log(data.toString());
         });
 
         child.stderr.on('data', function (data) {
-            log(data.toString());
+            console.log(data.toString());
         });
         let promise = new Promise((resolve, reject) => {
             child.addListener('error', reject);
