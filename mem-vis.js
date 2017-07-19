@@ -8,7 +8,6 @@
     let Promise = require('bluebird');
     const serve = require('serve');
     const cp = require('child_process');
-
     let binPath = 'node'; // assume that the node binary the default node
     try {
         cp.execSync('node --alloc-trace -e "var test;"',  
@@ -27,6 +26,8 @@
             }
             console.log('[i]: using local node binary');
             binPath = path.resolve(__dirname, 'bin', osType, 'node');
+        } else {
+            console.log('[i]: Using node installed via nvs.');
         }
     }
 
