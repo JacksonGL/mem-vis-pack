@@ -10,7 +10,7 @@ Install [NVS](https://github.com/jasongin/nvs) and run the following script:
 ### Mac, Linux
 
 ```
-wget mem-vis-setup; ./mem-vis-setup.sh
+wget https://github.com/JacksonGL/mem-vis-pack/releases/download/v1.0.0/mem-vis-setup.sh; ./mem-vis-setup.sh; nvs use mem-vis/8.0.0
 ```
 
 The `mem-vis-setup.sh` downloads node-chakracore (with mem-analysis code) via NVS and install the node binary side-by-side with the existing node distribution. The scripts also does git clone and installs this repo. You can also [do it manually]().
