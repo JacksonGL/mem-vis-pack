@@ -23,8 +23,6 @@ See the [instructions here](doc/install-manually.md).
 
 The base dir of the following shell commands is the root dir of this repo.
 
-## Dump Memory Snapshot
-
   **1.** In the JavaScript code, add the following statements to dump memory snapshot:
 
 ```javascript
@@ -50,4 +48,4 @@ node ./mem-vis.js ./tests/crypto.js
   
   **3.** open [http://localhost:5000](http://localhost:5000)
 
-**Notice**: generator is not handled by the Time Travel Debugging yet.
+**Notice**: Async functions and generators are not supported by the Time Travel Debugging yet.
