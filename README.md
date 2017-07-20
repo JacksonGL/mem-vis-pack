@@ -15,6 +15,10 @@ git clone https://github.com/JacksonGL/mem-vis-pack.git; cd mem-vis-pack; ./scri
 
 The `mem-vis-setup.sh` downloads node-chakracore (with mem-analysis code) via NVS and install the node binary side-by-side with the existing node distribution. The scripts also does git clone and installs this repo. You can also [install it manually](doc/install-manually.md).
 
+### Windows
+
+See the [instructions here](doc/install-manually.md).
+
 # Usage
 
 The base dir of the following shell commands is the root dir of this repo.
