@@ -1,6 +1,6 @@
 # Mem-vis
 
-This repo contains a prototype that takes a memory snapshot from node-chakra and visualizes the memory data.
+A tool that takes a memory snapshot from node-chakra and visualizes the memory data.
 
 **Requirement**: the binaries in this repo assume a **x64 Windows 10**, **Ubuntu 14.04+**, or **OSX 10.11+**.
 
