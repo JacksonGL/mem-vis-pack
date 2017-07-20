@@ -46,9 +46,4 @@ node ./mem-vis.js ./tests/crypto.js
   
   **3.** open [http://localhost:5000](http://localhost:5000)
 
-
-# Development
-
-To set up the development environment of this tool, see [here](https://github.com/JacksonGL/memo-vis).
-
 **Notice**: generator is not handled by the Time Travel Debugging yet.
