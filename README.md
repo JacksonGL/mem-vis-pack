@@ -4,13 +4,16 @@ This repo contains a prototype that takes a memory snapshot from node-chakra and
 
 **Requirement**: the binaries in this repo assume a **x64 Windows 10**, **Ubuntu 14.04+**, or **OSX 10.11+**.
 
-# Install
+## Setup
+Install [NVS](https://github.com/jasongin/nvs) and run the following script:
+
+### Mac, Linux
 
 ```
-git clone https://github.com/JacksonGL/mem-vis-pack.git
-cd mem-vis-pack
-npm install
+wget mem-vis-setup; ./mem-vis-setup.sh
 ```
+
+The `mem-vis-setup.sh` downloads node-chakracore (with mem-analysis code) via NVS and install the node binary side-by-side with the existing node distribution. The scripts also does git clone and installs this repo. You can also [do it manually]().
 
 # Usage
 
@@ -49,12 +52,3 @@ node ./mem-vis.js ./tests/crypto.js
 To set up the development environment of this tool, see [here](https://github.com/JacksonGL/memo-vis).
 
 **Notice**: generator is not handled by the Time Travel Debugging yet.
-
-
-# Install (nvs)
-
-To install the node-chakracore side-by-side with you existing node, we recommend using [nvs](https://github.com/jasongin/nvs)
-
-```
-nvs remote mem-analysis https://raw.githubusercontent.com/JacksonGL/node-chakracore/AllocTracing/releases
-```
