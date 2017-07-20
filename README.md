@@ -19,7 +19,7 @@ The `mem-vis-setup.sh` downloads node-chakracore (with mem-analysis code) via NV
 
 See the [instructions here](doc/install-manually.md).
 
-# Usage
+## Usage
 
 The base dir of the following shell commands is the root dir of this repo.
 
