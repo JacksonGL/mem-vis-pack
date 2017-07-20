@@ -32,7 +32,7 @@ if (global.emitTTDLog) {
 }
 ```
 
-  **2.** record, replay, and get snapshots
+  **2.** run TTD and get snapshots
 
 ```
 node ./mem-vis.js <NODE-APP> <APP-ARGS>
