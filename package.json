@@ -4,7 +4,8 @@
   "description": "binary version of the mem-vis tool",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node mem-vis.js tests/crypto.js"
   },
   "author": "Liang Gong",
   "license": "ISC",

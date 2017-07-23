@@ -1,3 +1,4 @@
 node_modules/*
 snapshot/*
 mem-vis/data/*
+npm-debug.log
