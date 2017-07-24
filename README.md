@@ -2,7 +2,7 @@
 
 A tool that takes a memory snapshot from [node-chakracore](https://github.com/nodejs/node-chakracore) and visualizes the memory data.
 
-For a quick preview, watch [this video](https://www.youtube.com/watch?v=BmaIobIFl54).
+For a quick preview, watch [this video](https://www.youtube.com/watch?v=BmaIobIFl54) or [try mem-vis in a docker container](doc/docker.md).
 
 **Requirement**: the binaries in this repo assume a **x64 Windows 10**, **Ubuntu 14.04+**, or **OSX 10.11+**.
 
