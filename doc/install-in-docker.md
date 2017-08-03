@@ -1,4 +1,4 @@
-## Install Mem-Vis in Docker
+## Install Mem-vis in Docker
 
 First, start a docker container based on an Ubuntu image. For example:
 ```bash
