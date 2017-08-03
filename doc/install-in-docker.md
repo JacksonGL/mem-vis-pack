@@ -13,7 +13,7 @@ apt-get update && \
 apt-get --assume-yes install curl tar xz-utils && \
 curl -O https://raw.githubusercontent.com/JacksonGL/mem-vis-pack/master/bin/linux/debian-pkg.deb && \
 dpkg -i debian-pkg.deb && \
-source /root/.nvs/nvs.sh && \
+source "$HOME/.nvs/nvs.sh" && \
 nvs use mem-vis/8.0.0 && \
 cd /var/lib/mem-vis-pack/ && \
 npm install
