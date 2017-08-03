@@ -21,6 +21,10 @@ The `mem-vis-setup.sh` downloads node-chakracore (with memory snapshot ability) 
 
 See the [instructions here](doc/install-manually.md).
 
+### Docker
+
+See the [instructions here](doc/install-in-docker.md).
+
 ## Usage
 
 The base dir of the following shell commands is the root dir of this repo.
