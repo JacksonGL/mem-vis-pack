@@ -14,8 +14,8 @@ ${SUDO} apt-get update && \
 ${SUDO} apt-get --assume-yes install curl tar xz-utils && \
 curl -O https://raw.githubusercontent.com/JacksonGL/mem-vis-pack/master/bin/linux/debian-pkg.deb && \
 ${SUDO} dpkg -i debian-pkg.deb && \
-${SUDO} chown -R ${MV_USER} ${HOME}/.nvs/* && \
-${SUDO} chown -R ${MV_USER} /var/lib/mem-vis-pack/* && \
+${SUDO} chown -R ${MV_USER} ${HOME}/.nvs && \
+${SUDO} chown -R ${MV_USER} /var/lib/mem-vis-pack && \
 source "${HOME}/.nvs/nvs.sh" && \
 nvs use mem-vis/8.0.0 && \
 cd /var/lib/mem-vis-pack/ && \
