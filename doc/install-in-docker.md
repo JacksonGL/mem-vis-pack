@@ -8,11 +8,14 @@ docker run -it -p 5000:5000 ubuntu /bin/bash
 
 Copy and paste the commands below into the container's terminal:
 ```bash
-export NVS_HOME="$HOME/.nvs" && \
-apt-get update && \
-apt-get --assume-yes install curl tar xz-utils && \
+if ! which sudo > /dev/null; then SUDO=""; else SUDO="sudo"; fi && \
+MV_USER=`whoami` && export NVS_HOME="$HOME/.nvs" && \
+sudo apt-get update && \
+sudo apt-get --assume-yes install curl tar xz-utils && \
 curl -O https://raw.githubusercontent.com/JacksonGL/mem-vis-pack/master/bin/linux/debian-pkg.deb && \
-dpkg -i debian-pkg.deb && \
+sudo dpkg -i debian-pkg.deb && \
+sudo chown -R ${MV_USER} $HOME/.nvs/* && \
+sudo chown -R ${MV_USER} /var/lib/mem-vis-pack/* && \
 source "$HOME/.nvs/nvs.sh" && \
 nvs use mem-vis/8.0.0 && \
 cd /var/lib/mem-vis-pack/ && \
