@@ -36,9 +36,7 @@ Then, visit [http://localhost:5000](http://localhost:5000) on the host machine.
 
 ```javascript
 if (global.emitTTDLog) {
-    let snapshotDir = '/var/lib/mem-vis-pack/snapshot';
-    console.log('Dumping snapshot to -- ' + snapshotDir);
-    global.emitTTDLog(snapshotDir);
+    global.emitTTDLog('/var/lib/mem-vis-pack/snapshot');
 }
 ```
 
