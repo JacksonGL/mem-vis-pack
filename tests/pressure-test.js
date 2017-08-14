@@ -9,7 +9,7 @@ if (nodeType === 'v8') {
     heapdump = require('heapdump');
 }
 
-let upperbound = 20000 * 20;
+let upperbound = 2000 * 20;
 var memLimit = 10000000;
 var memInc = 5000000;
 function checkMem() {
