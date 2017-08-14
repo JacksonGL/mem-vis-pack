@@ -8,12 +8,15 @@ docker run -it -p 5000:5000 ubuntu /bin/bash
 
 Copy and paste the commands below into the container's terminal:
 ```bash
-export NVS_HOME="$HOME/.nvs" && \
-apt-get update && \
-apt-get --assume-yes install curl tar xz-utils && \
+if ! which sudo > /dev/null; then SUDO=""; else SUDO="sudo"; fi && \
+MV_USER=`whoami` && export NVS_HOME="${HOME}/.nvs" && \
+${SUDO} apt-get update && \
+${SUDO} apt-get --assume-yes install curl tar xz-utils && \
 curl -O https://raw.githubusercontent.com/JacksonGL/mem-vis-pack/master/bin/linux/debian-pkg.deb && \
-dpkg -i debian-pkg.deb && \
-source "$HOME/.nvs/nvs.sh" && \
+${SUDO} dpkg -i debian-pkg.deb && \
+${SUDO} chown -R ${MV_USER} ${HOME}/.nvs && \
+${SUDO} chown -R ${MV_USER} /var/lib/mem-vis-pack && \
+source "${HOME}/.nvs/nvs.sh" && \
 nvs use mem-vis/8.0.0 && \
 cd /var/lib/mem-vis-pack/ && \
 npm install
@@ -33,9 +36,7 @@ Then, visit [http://localhost:5000](http://localhost:5000) on the host machine.
 
 ```javascript
 if (global.emitTTDLog) {
-    let snapshotDir = '/var/lib/mem-vis-pack/snapshot';
-    console.log('Dumping snapshot to -- ' + snapshotDir);
-    global.emitTTDLog(snapshotDir);
+    global.emitTTDLog('/var/lib/mem-vis-pack/snapshot');
 }
 ```
 
