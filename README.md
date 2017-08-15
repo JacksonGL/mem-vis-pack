@@ -38,7 +38,7 @@ setTimeout(() => {
 }, 10);
 ```
 
-  **2.** In the JavaScript code, add the following statements to dump memory snapshot:
+  **2.** In the JavaScript code, add the following statements to get the memory snapshot:
 
 ```javascript
 if (global.emitTTDLog) {
@@ -48,6 +48,7 @@ if (global.emitTTDLog) {
     global.emitTTDLog(snapshotDir);
 }
 ```
+When ```emitTTDLog``` is called, it takes the heap snapshot and dumps it to ```snapshotDir```.
 
   **3.** run TTD and get snapshots
 
