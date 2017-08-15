@@ -29,7 +29,16 @@ See the [instructions here](doc/install-in-docker.md).
 
 The base dir of the following shell commands is the root dir of this repo.
 
-  **1.** In the JavaScript code, add the following statements to dump memory snapshot:
+  **1.** Make sure the main file is wrapped as follows. E.g., ```app.js``` is the main file if you run ```node app.js```.
+
+```javascript
+setTimeout(() => {}, 0);
+setTimeout(() => {
+	// content of main file
+}, 10);
+```
+
+  **2.** In the JavaScript code, add the following statements to dump memory snapshot:
 
 ```javascript
 if (global.emitTTDLog) {
@@ -40,7 +49,7 @@ if (global.emitTTDLog) {
 }
 ```
 
-  **2.** run TTD and get snapshots
+  **3.** run TTD and get snapshots
 
 ```
 node ./mem-vis.js <NODE-APP> <APP-ARGS>
@@ -52,6 +61,6 @@ Example:
 node ./mem-vis.js ./tests/crypto.js
 ```
   
-  **3.** open [http://localhost:5000](http://localhost:5000)
+  **4.** open [http://localhost:5000](http://localhost:5000)
 
-**Notice**: Async functions and generators are not supported by the Time Travel Debugging yet.
+**Notice:** If an object in the heap is keep alive only by stack trace frames, it won’t be captured in the heap snapshot right now.
