@@ -35,8 +35,9 @@
     let replayDir = path.resolve(__dirname, 'snapshot');
     let memVisDir = path.resolve(__dirname, 'mem-vis');
     let dataDir = path.resolve(memVisDir, 'data');
-    let recordArgs = `--record --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
-    let replayArgs = `--replay=${replayDir} --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    // let recordArgs = `--record --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    let recordArgs = `--record ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    let replayArgs = `--alloc-trace --replay=${replayDir} ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
     let handler = (err) => {
         if (!err) return;
         console.log('[!]: Something is wrong. Let me know (gongliang13@berkeley.edu). Thanks :)');
@@ -57,8 +58,10 @@
     // record
     cleanDir(replayDir)
     .then(cleanDir.bind(null, dataDir), handler)
+    .then(showMsg.bind(null, '\n\n----------- START RECORDING ------------\n\n'))
     .then(executeAndPromisify.bind(null, binPath, recordArgs.split(' '), '[i]: recording...'), handler)
-    // .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
+    .then(showMsg.bind(null, '\n\n----------- START REPLAYING ------------\n\n'))
+    .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
     .then(copySnapshots.bind(null, replayDir, dataDir), handler)
     .then(openVisualization.bind(null), handler)
     .then(handler, handler);
@@ -109,6 +112,14 @@
                 });
             
         }
+        return promise;
+    }
+
+    function showMsg(msg) {
+        let promise = new Promise((resolve, reject) => {
+            console.log(msg);
+            process.nextTick(resolve);
+        });
         return promise;
     }
 

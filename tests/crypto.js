@@ -2080,14 +2080,13 @@
     encrypt();
     decrypt();
 
-    setTimeout(function() {
-        console.log(decrypt);
-        if (global.emitTTDLog) {
-            // please make sure <MEM-VIS-DIR> points to the root dir of this repo
-            let snapshotDir = __dirname + '/../snapshot';
-            console.log('Dumping snapshot to -- ' + snapshotDir);
-            global.emitTTDLog(snapshotDir);
-        }
-    }, 500);
+
+if (global.emitTTDLog) {
+    // please make sure <MEM-VIS-DIR> points to the root dir of this repo
+    let snapshotDir = __dirname + '/../snapshot';
+    console.log('Dumping snapshot to -- ' + snapshotDir);
+    global.emitTTDLog(snapshotDir);
+}
+
 
 
