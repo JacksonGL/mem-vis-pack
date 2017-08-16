@@ -1,5 +1,7 @@
 # Install Manually
 
+Please install [NVS](https://github.com/jasongin/nvs) first.
+
 ## Install Node-Chakracore via NVS
 
 To install the node-chakracore side-by-side with you existing node, we recommend using [nvs](https://github.com/jasongin/nvs)

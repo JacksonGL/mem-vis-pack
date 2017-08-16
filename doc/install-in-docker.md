@@ -32,7 +32,16 @@ Then, visit [http://localhost:5000](http://localhost:5000) on the host machine.
 
 ## Use Mem-vis in Docker
 
-  **1.** In your node app, add the code below to grab a snapshot:
+  **1.** Make sure the main file is wrapped as follows. E.g., ```app.js``` is the main file if you run ```node app.js```.
+
+```javascript
+setTimeout(() => {}, 0);
+setTimeout(() => {
+	// content of main file
+}, 10);
+```
+
+  **2.** In your node app, add the code below to grab a snapshot:
 
 ```javascript
 if (global.emitTTDLog) {
@@ -40,10 +49,12 @@ if (global.emitTTDLog) {
 }
 ```
 
-  **2.** run your node.js app:
+  **3.** run your node.js app:
 
 ```
 node /var/lib/mem-vis-pack/mem-vis.js <your-node-app.js> <your-app-args>
 ```
   
-  **3.** visit [http://localhost:5000](http://localhost:5000) on the host machine.
+  **4.** visit [http://localhost:5000](http://localhost:5000) on the host machine.
+
+**Notice:** If an object in the heap is keep alive only by stack trace frames, it won’t be captured in the heap snapshot right now.
