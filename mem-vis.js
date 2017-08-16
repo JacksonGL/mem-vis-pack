@@ -34,13 +34,12 @@
     let argv = process.argv.slice(2);
     let replayDir = path.resolve(__dirname, 'snapshot');
     let memVisDir = path.resolve(__dirname, 'mem-vis');
-    
     let dataDir = path.resolve(memVisDir, 'data');
-    let recordArgs = `--record --alloc-trace ${argv.join(' ')}`;
-    let replayArgs = `--replay=${replayDir} --alloc-trace ${argv.join(' ')}`;
+    let recordArgs = `--record --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    let replayArgs = `--replay=${replayDir} --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
     let handler = (err) => {
         if (!err) return;
-        console.log('[!]: something wrong. Let me know (gongliang13@berkeley.edu). Thanks :-)');
+        console.log('[!]: Something is wrong. Let me know (gongliang13@berkeley.edu). Thanks :)');
         console.log(err);
     };
     let _consoleLog = console.log;

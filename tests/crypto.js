@@ -1,7 +1,4 @@
 
-
-setTimeout(() => {}, 0);
-setTimeout(function() {
     /*
  * Copyright (c) 2003-2005  Tom Wu
  * All Rights Reserved.
@@ -2085,7 +2082,6 @@ setTimeout(function() {
 
     setTimeout(function() {
         console.log(decrypt);
-        
         if (global.emitTTDLog) {
             // please make sure <MEM-VIS-DIR> points to the root dir of this repo
             let snapshotDir = __dirname + '/../snapshot';
@@ -2093,6 +2089,5 @@ setTimeout(function() {
             global.emitTTDLog(snapshotDir);
         }
     }, 500);
-}, 100);
 
 
