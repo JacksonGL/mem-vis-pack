@@ -66,4 +66,4 @@ node ./mem-vis.js ./tests/crypto.js
   
   **3.** open [http://localhost:5000](http://localhost:5000)
 
-**Notice:** If an object in the heap is keep alive only by stack trace frames, it won’t be captured in the heap snapshot right now.
+**Notice:** For now, objects keep alive only by stack trace frames are not visualized.
