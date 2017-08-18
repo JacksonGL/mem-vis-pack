@@ -1,29 +1,13 @@
-ttdLogURI = __dirname + '/../snapshot';
+function outter() {
+    var v1 = new Int32Array(1000000);
+    var v2 = v1.slice(1, 1);
 
-setTimeout(() => {}, 0);
-setTimeout(function () {
-
-    var theThing = null;
-    var replaceThing = function () {
-        var originalThing = theThing;
-        var unused = function () {
-            if (originalThing)
-                console.log("hi");
-        };
-        theThing = {
-            longStr: new Array(10000).join('*'),
-            someMethod: function () {
-                console.log(someMessage);
-            }
-        };
-    };
-    var ref = setInterval(replaceThing, 100);
-
-    if (global.emitTTDLog) {
-        setTimeout(function timeoutCB_() {
-            emitTTDLog(ttdLogURI);
-            clearInterval(ref);
-        }, 5000);
+    function unused() {
+        return v1.length + ': ' + v2;
     }
+    return function inner(v) {
+        return v * v2;
+    };
+}
 
-}, 100);
+ref = outter();

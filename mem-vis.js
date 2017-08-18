@@ -1,7 +1,6 @@
 (function () {
     'use strict';
     let verbose = false;
-
     let fs = require('fs');
     let path = require('path');
     let spawn = require('child_process').spawn;
@@ -31,13 +30,23 @@
         }
     }
 
+    let recordOnly = true;
+    let recordArgs, replayArgs;
+    if (process.argv[2] === '-rr' || 
+        process.argv[2] === '--record-and-replay') {
+        recordOnly = false;
+        process.argv.splice(2, 1);
+    }
     let argv = process.argv.slice(2);
     let replayDir = path.resolve(__dirname, 'snapshot');
     let memVisDir = path.resolve(__dirname, 'mem-vis');
     let dataDir = path.resolve(memVisDir, 'data');
-    // let recordArgs = `--record --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
-    let recordArgs = `--record ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
-    let replayArgs = `--alloc-trace --replay=${replayDir} ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    if (recordOnly) {
+        recordArgs = `--record --alloc-trace ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    } else {
+        recordArgs = `--record ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
+    }
+    replayArgs = `--alloc-trace --replay=${replayDir} ${__dirname + '/scripts/ttd-loader.js'} ${argv.join(' ')}`;
     let handler = (err) => {
         if (!err) return;
         console.log('[!]: Something is wrong. Let me know (gongliang13@berkeley.edu). Thanks :)');
@@ -55,16 +64,27 @@
         }
     };
 
-    // record
-    cleanDir(replayDir)
-    .then(cleanDir.bind(null, dataDir), handler)
-    .then(showMsg.bind(null, '\n\n----------- START RECORDING ------------\n\n'))
-    .then(executeAndPromisify.bind(null, binPath, recordArgs.split(' '), '[i]: recording...'), handler)
-    .then(showMsg.bind(null, '\n\n----------- START REPLAYING ------------\n\n'))
-    .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
-    .then(copySnapshots.bind(null, replayDir, dataDir), handler)
-    .then(openVisualization.bind(null), handler)
-    .then(handler, handler);
+    if (recordOnly) {
+        // record only
+        cleanDir(replayDir)
+        .then(cleanDir.bind(null, dataDir), handler)
+        .then(showMsg.bind(null, '\n\n----------- START RECORDING ------------\n\n'))
+        .then(executeAndPromisify.bind(null, binPath, recordArgs.split(' '), '[i]: recording...'), handler)
+        .then(copySnapshots.bind(null, replayDir, dataDir), handler)
+        .then(openVisualization.bind(null), handler)
+        .then(handler, handler);
+    } else {
+        // record and replay
+        cleanDir(replayDir)
+        .then(cleanDir.bind(null, dataDir), handler)
+        .then(showMsg.bind(null, '\n\n----------- START RECORDING ------------\n\n'))
+        .then(executeAndPromisify.bind(null, binPath, recordArgs.split(' '), '[i]: recording...'), handler)
+        .then(showMsg.bind(null, '\n\n----------- START REPLAYING ------------\n\n'))
+        .then(executeAndPromisify.bind(null, binPath, replayArgs.split(' '), '[i]: replaying...'), handler)
+        .then(copySnapshots.bind(null, replayDir, dataDir), handler)
+        .then(openVisualization.bind(null), handler)
+        .then(handler, handler);
+    }
 
     function openVisualization() {
         serve(memVisDir, {
@@ -112,6 +132,13 @@
                 });
             
         }
+        return promise;
+    }
+
+    function wait(time) {
+        let promise = new Promise((resolve, reject) => {
+            setTimeout(resolve, time);
+        });
         return promise;
     }
 
