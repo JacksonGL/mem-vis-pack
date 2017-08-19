@@ -1,4 +1,4 @@
-# Mem-vis
+# Mem-Vis
 
 A tool that takes a memory snapshot from [node-chakracore](https://github.com/nodejs/node-chakracore) and visualizes the memory data.
 
