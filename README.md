@@ -1,10 +1,10 @@
 # Mem-Vis
 
-A tool that takes a memory snapshot from [node-chakracore](https://github.com/nodejs/node-chakracore) and visualizes the memory data.
+A tool that takes a memory snapshot from [node-chakracore](https://github.com/nodejs/node-chakracore) and visualizes the memory data. Different from the Chrome Dev Tool, this tool records and visualizes source code statements responsible for the allocations of objects in the heap. Mem-vis also integrates with [Time-Travelling Debugging](https://github.com/nodejs/node-chakracore/blob/master/TTD-README.md).
 
 For a quick preview, watch [this video](https://www.youtube.com/watch?v=BmaIobIFl54) or [try mem-vis in a docker container](doc/docker.md), or see the [heap snapshot of Octane crypto.js](http://jacksongl.github.io/files/demo/memvis/visualization.html).
 
-**Requirement**: the binaries in this repo assume a **x64 Windows 10**, **Ubuntu 14.04+**, or **OSX 10.11+**.
+**Requirement**: the binaries in this repo assume **x64 Windows 10**, **Ubuntu 14.04+**, **OSX 10.11+**, or **Docker Unbuntu** environment.
 
 ## Setup
 Install [NVS](https://github.com/jasongin/nvs) and run the following script:
