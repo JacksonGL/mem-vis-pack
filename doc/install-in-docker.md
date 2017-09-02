@@ -7,7 +7,7 @@ docker run -it -p 5000:5000 ubuntu /bin/bash
 ```
 
 Copy and paste the commands below into the container's terminal:
-```bash
+```shell
 if ! which sudo > /dev/null; then SUDO=""; else SUDO="sudo"; fi && \
 MV_USER=`whoami` && export NVS_HOME="${HOME}/.nvs" && \
 ${SUDO} apt-get update && \
@@ -24,7 +24,7 @@ npm install
 
 ### Quick Check
 
-```bash
+```shell
 node /var/lib/mem-vis-pack/mem-vis.js /var/lib/mem-vis-pack/tests/crypto.js
 ```
 
@@ -53,7 +53,7 @@ if (global.emitTTDLog) {
 
   **2.** run your node.js app:
 
-```
+```shell
 node /var/lib/mem-vis-pack/mem-vis.js <your-node-app.js> <your-app-args>
 ```
   
