@@ -8,12 +8,12 @@ To install the node-chakracore side-by-side with you existing node, we recommend
 
 ```
 nvs remote mem-vis https://raw.githubusercontent.com/JacksonGL/node-chakracore/AllocTracing/releases
-nvs add mem-vis/8.0.0
+nvs add mem-vis/9.0.0
 ```
 
 Remember to swtich to the modified node-chakracore when opening a new terminal:
 ```
-nvs use mem-vis/8.0.0
+nvs use mem-vis/9.0.0
 ```
 
 

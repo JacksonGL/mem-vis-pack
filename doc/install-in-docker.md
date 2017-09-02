@@ -17,7 +17,7 @@ ${SUDO} dpkg -i debian-pkg.deb && \
 ${SUDO} chown -R ${MV_USER} ${HOME}/.nvs && \
 ${SUDO} chown -R ${MV_USER} /var/lib/mem-vis-pack && \
 source "${HOME}/.nvs/nvs.sh" && \
-nvs use mem-vis/8.0.0 && \
+nvs use mem-vis/9.0.0 && \
 cd /var/lib/mem-vis-pack/ && \
 npm install
 ```
