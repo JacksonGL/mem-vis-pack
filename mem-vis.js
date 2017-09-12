@@ -42,11 +42,13 @@
     let memVisDir = path.resolve(__dirname, 'mem-vis');
     let dataDir = path.resolve(memVisDir, 'data');
     if (recordOnly) {
-        recordArgs = [`--record`, `--alloc-trace`, `${__dirname + '/scripts/ttd-loader.js'}`, `${argv.join(' ')}`];
+        recordArgs = [`--record`, `--alloc-trace`, `${__dirname + '/scripts/ttd-loader.js'}`];
     } else {
-        recordArgs = [`--record`, `${__dirname + '/scripts/ttd-loader.js'}`, `${argv.join(' ')}`];
+        recordArgs = [`--record`, `${__dirname + '/scripts/ttd-loader.js'}`];
     }
-    replayArgs = [`--alloc-trace`, `--replay=${replayDir}`, `${__dirname + '/scripts/ttd-loader.js'}`, `${argv.join(' ')}`];
+    replayArgs = [`--alloc-trace`, `--replay=${replayDir}`, `${__dirname + '/scripts/ttd-loader.js'}`];
+    recordArgs = recordArgs.concat(argv);
+    replayArgs = replayArgs.concat(argv);
     let handler = (err) => {
         if (!err) return;
         console.log('[!]: Something is wrong. Let me know (gongliang13@berkeley.edu). Thanks :)');
